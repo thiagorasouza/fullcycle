@@ -1,6 +1,14 @@
+FROM golang:1.21.3-alpine AS builder
+WORKDIR /app
+COPY hello.go .
+RUN go build hello.go
+
 FROM scratch
-
-COPY hello /
-
+COPY --from=builder /app/hello hello
 CMD ["./hello"]
+
+
+
+
+
 
