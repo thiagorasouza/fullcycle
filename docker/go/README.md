@@ -8,5 +8,5 @@ Desafio do curso :rocket: Full Cycle para criar um :whale: container a partir de
 ## :memo: Instruções
 
 ```
-docker run thiagorasouza/codeeducation
+docker run thiagorasouza/fullcycle
 ```
