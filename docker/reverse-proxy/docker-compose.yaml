@@ -1,13 +1,30 @@
 services:
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    networks:
+      - node-network
+    ports:
+      - "8080:80"
+    restart: always
+    tty: true
+    entrypoint: dockerize -wait http://node:3000 -timeout 10s /docker-entrypoint.sh
+    command: nginx -g "daemon off;"
+    depends_on:
+      - node
+
   node:
     build:
       context: node
     container_name: node
-    ports:
-      - "3000:3000"
     networks:
       - node-network
     tty: true
+    entrypoint: dockerize -wait tcp://mysql:3306 -timeout 10s
+    command: node index.js
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql:8.1.0

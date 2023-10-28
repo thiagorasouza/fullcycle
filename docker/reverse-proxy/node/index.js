@@ -2,6 +2,8 @@ const http = require("http");
 const mysql = require("mysql2");
 const faker = require("@faker-js/faker").faker;
 
+const PORT = 3000;
+
 const config = {
   host: "mysql",
   user: "root",
@@ -10,6 +12,8 @@ const config = {
 };
 
 const server = http.createServer((req, res) => {
+  if (req.url !== "/") return res.end();
+
   try {
     const fakeName = faker.person.fullName();
 
@@ -34,7 +38,6 @@ const server = http.createServer((req, res) => {
       `);
       }
     );
-    connection.end();
   } catch (error) {
     console.log(error);
     res.statusCode = 500;
@@ -42,6 +45,6 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
   console.log("Server is listening on 3000");
 });

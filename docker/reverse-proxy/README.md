@@ -21,7 +21,7 @@ Requisitos:
 :computer: No terminal:
 
 ```
-docker-compose up -d --build
+docker-compose up -d
 ```
 
 :earth_americas: No navegador:
